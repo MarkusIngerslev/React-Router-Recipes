@@ -7,23 +7,25 @@ import Login from "./security/Login";
 //import Logout from "./security/_Logout";
 import Layout from "./Layout";
 import Home from "./Home";
+import ContactPage from "./recipes/ContactPage";
 import "./App.css";
 
 export default function App() {
-  //const auth = useAuth();
-  return (
-    <Layout>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/categories/" element={<Categories />} />
-        <Route path="/recipes">
-          <Route index element={<Recipes />} />
-          <Route path=":id" element={<Recipe />} />
-        </Route>
-        <Route path="/add" element={<RecipeForm />} />
-        <Route path="/login" element={<Login />} />
-        {/* <Route path="/logout" element={<Logout />} /> */}
-      </Routes>
-    </Layout>
-  );
+    //const auth = useAuth();
+    return (
+        <Layout>
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/categories/" element={<Categories />} />
+                <Route path="/recipes">
+                    <Route index element={<Recipes />} />
+                    <Route path=":id" element={<Recipe />} />
+                </Route>
+                <Route path="/add" element={<RecipeForm />} />
+                <Route path="/contact" element={<ContactPage />} />
+                <Route path="/login" element={<Login />} />
+                {/* <Route path="/logout" element={<Logout />} /> */}
+            </Routes>
+        </Layout>
+    );
 }
