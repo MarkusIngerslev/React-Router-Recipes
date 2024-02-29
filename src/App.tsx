@@ -26,6 +26,7 @@ export default function App() {
                 <Route path="/contact" element={<ContactPage />} />
                 <Route path="/login" element={<Login />} />
                 {/* <Route path="/logout" element={<Logout />} /> */}
+                <Route path="*" element={<h2>Not Found</h2>} />
             </Routes>
         </Layout>
     );
