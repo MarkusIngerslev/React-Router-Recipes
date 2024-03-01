@@ -4,7 +4,7 @@ import Recipe from "./recipes/Recipe";
 // import Recipes from "./recipes/RecipeList";
 import RecipeForm from "./recipes/RecipeForm";
 import Login from "./security/Login";
-//import Logout from "./security/_Logout";
+import Logout from "./security/Logout";
 import Layout from "./Layout";
 import Home from "./Home";
 import ContactPage from "./recipes/ContactPage";
@@ -25,7 +25,7 @@ export default function App() {
                 <Route path="/add" element={<RecipeForm />} />
                 <Route path="/contact" element={<ContactPage />} />
                 <Route path="/login" element={<Login />} />
-                {/* <Route path="/logout" element={<Logout />} /> */}
+                <Route path="/logout" element={<Logout />} />
                 <Route path="*" element={<h2>Not Found</h2>} />
             </Routes>
         </Layout>
