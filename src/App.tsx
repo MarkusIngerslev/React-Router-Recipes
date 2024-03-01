@@ -10,9 +10,11 @@ import Home from "./Home";
 import ContactPage from "./recipes/ContactPage";
 import "./App.css";
 import RecipesLayout from "./recipes/RecipesLayout";
+import RequireAuth from "./security/RequireAuth";
+// import { useAuth } from "./security/AuthProvider";
 
 export default function App() {
-    //const auth = useAuth();
+    // const auth = useAuth();
     return (
         <Layout>
             <Routes>
@@ -22,7 +24,14 @@ export default function App() {
                     <Route path=":id" element={<Recipe />} />
                     <Route path="test" element={<h1>Test</h1>} />
                 </Route>
-                <Route path="/add" element={<RecipeForm />} />
+                <Route
+                    path="/add"
+                    element={
+                        <RequireAuth roles={["ADMIN"]}>
+                            <RecipeForm />
+                        </RequireAuth>
+                    }
+                />
                 <Route path="/contact" element={<ContactPage />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/logout" element={<Logout />} />
