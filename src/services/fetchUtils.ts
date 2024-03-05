@@ -17,7 +17,7 @@ export function makeOptions(method: string, body: object | null, addToken?: bool
     }
     if (addToken) {
         //@ts-ignore
-        opts.headers["Authorization"] = `Bearer ${localStorage.getItem("jwtToken")}`;
+        opts.headers["Authorization"] = "Bearer " + localStorage.getItem("token");
     }
     return opts;
 }
