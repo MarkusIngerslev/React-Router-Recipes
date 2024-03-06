@@ -32,7 +32,7 @@ export default function App() {
                             <RecipeForm />
                         </RequireAuth>
                     }
-                />
+                ></Route>
                 <Route
                     path="/addCategory"
                     element={
@@ -40,7 +40,7 @@ export default function App() {
                             <CategoriesForm />
                         </RequireAuth>
                     }
-                />
+                ></Route>
                 <Route path="/contact" element={<ContactPage />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/logout" element={<Logout />} />
