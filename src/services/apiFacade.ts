@@ -81,7 +81,7 @@ async function getInfo(): Promise<Info> {
     return fetch(INFO_URL).then(handleHttpErrors);
 }
 
-export type { Recipe, Info };
+export type { Recipe, Category, Info };
 // eslint-disable-next-line react-refresh/only-export-components
 export {
     getCategories,
