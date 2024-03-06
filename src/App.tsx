@@ -11,6 +11,7 @@ import ContactPage from "./recipes/ContactPage";
 import "./App.css";
 import RecipesLayout from "./recipes/RecipesLayout";
 import RequireAuth from "./security/RequireAuth";
+import CategoriesForm from "./recipes/CategoriesForm";
 // import { useAuth } from "./security/AuthProvider";
 
 export default function App() {
@@ -29,6 +30,14 @@ export default function App() {
                     element={
                         <RequireAuth roles={["ADMIN", "USER"]}>
                             <RecipeForm />
+                        </RequireAuth>
+                    }
+                />
+                <Route
+                    path="/addCategory"
+                    element={
+                        <RequireAuth roles={["ADMIN"]}>
+                            <CategoriesForm />
                         </RequireAuth>
                     }
                 />
