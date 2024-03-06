@@ -15,6 +15,11 @@ interface Recipe {
     source: string;
 }
 
+interface Category {
+    id: number | null;
+    name: string;
+}
+
 interface Info {
     reference: string;
     created: string;
@@ -29,6 +34,23 @@ async function getCategories(): Promise<Array<string>> {
     const res = await fetch(CATEGORIES_URL).then(handleHttpErrors);
     categories = [...res];
     return categories;
+}
+
+async function getCategory(id: number): Promise<Category> {
+    //if (recipes.length > 0) return [...recipes];
+    return fetch(CATEGORIES_URL + "/" + id).then(handleHttpErrors);
+}
+
+async function addCategory(newCategory: Category): Promise<Category> {
+    const method = newCategory.id ? "PUT" : "POST";
+    const options = makeOptions(method, newCategory, true);
+    const URL = newCategory.id ? `${CATEGORIES_URL}/${newCategory.id}` : CATEGORIES_URL;
+    return fetch(URL, options).then(handleHttpErrors);
+}
+
+async function deleteCategory(id: number): Promise<Category> {
+    const options = makeOptions("DELETE", null);
+    return fetch(`${CATEGORIES_URL}/${id}`, options).then(handleHttpErrors);
 }
 
 async function getRecipes(category: string | null): Promise<Array<Recipe>> {
@@ -61,4 +83,14 @@ async function getInfo(): Promise<Info> {
 
 export type { Recipe, Info };
 // eslint-disable-next-line react-refresh/only-export-components
-export { getCategories, getRecipes, getRecipe, addRecipe, deleteRecipe, getInfo };
+export {
+    getCategories,
+    getCategory,
+    addCategory,
+    deleteCategory,
+    getRecipes,
+    getRecipe,
+    addRecipe,
+    deleteRecipe,
+    getInfo,
+};
