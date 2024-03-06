@@ -44,6 +44,10 @@ export default function RecipeForm() {
 
     const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
+        if (!auth.isLoggedInAs(["ADMIN"]) && formData.owner !== auth.username) {
+            alert("You are not authorized to add/edit recipes");
+            return;
+        }
         const newRecipe = await addRecipe(formData);
         alert("New recipe added");
         console.info("New/Edited Recipe", newRecipe);
