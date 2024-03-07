@@ -2,6 +2,7 @@ import "./RecipeForm.css";
 import { useEffect, useState } from "react";
 import { getCategories, addRecipe, deleteRecipe, Recipe } from "../services/apiFacade";
 import { useLocation } from "react-router-dom";
+import { useAuth } from "../security/AuthProvider";
 
 const EMPTY_RECIPE = {
     id: null,
@@ -12,14 +13,14 @@ const EMPTY_RECIPE = {
     youTube: "",
     ingredients: "",
     source: "",
+    owner: "",
 };
 
 export default function RecipeForm() {
     const [categories, setCategories] = useState([""]);
     const recipeToEdit = useLocation().state || null;
-    // const recipeToEdit = null;
-    //const [formData, setFormData] = useState<Recipe>(recipeToEdit || EMPTY_RECIPE);
     const [formData, setFormData] = useState<Recipe>(recipeToEdit || EMPTY_RECIPE);
+    const auth = useAuth();
 
     useEffect(() => {
         getCategories().then((res) => setCategories(res));
@@ -30,6 +31,7 @@ export default function RecipeForm() {
         setFormData((prevFormData) => ({
             ...prevFormData,
             [name]: value,
+            owner: auth.username || "",
         }));
     };
     const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -42,6 +44,10 @@ export default function RecipeForm() {
 
     const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
+        if (!auth.isLoggedInAs(["ADMIN"]) && formData.owner !== auth.username) {
+            alert("You are not authorized to add/edit recipes");
+            return;
+        }
         const newRecipe = await addRecipe(formData);
         alert("New recipe added");
         console.info("New/Edited Recipe", newRecipe);

@@ -23,6 +23,3 @@ export const Categories = () => {
         </>
     );
 };
-
-export const Desktops = () => <h3>Desktop PC Page</h3>;
-export const Laptops = () => <h3>Laptops Page</h3>;
